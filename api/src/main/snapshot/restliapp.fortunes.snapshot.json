@@ -1,0 +1,33 @@
+{
+  "models" : [ {
+    "type" : "record",
+    "name" : "Fortune",
+    "namespace" : "restliapp",
+    "doc" : "Generate a fortune cookie",
+    "fields" : [ {
+      "name" : "fortune",
+      "type" : "string",
+      "doc" : "The Fortune cookie string"
+    } ]
+  } ],
+  "schema" : {
+    "name" : "fortunes",
+    "namespace" : "restliapp",
+    "path" : "/fortunes",
+    "schema" : "restliapp.Fortune",
+    "doc" : "generated from: restliapp.FortunesResource",
+    "collection" : {
+      "identifier" : {
+        "name" : "fortunesId",
+        "type" : "long"
+      },
+      "supports" : [ "get" ],
+      "methods" : [ {
+        "method" : "get"
+      } ],
+      "entity" : {
+        "path" : "/fortunes/{fortunesId}"
+      }
+    }
+  }
+}

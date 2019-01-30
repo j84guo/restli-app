@@ -8,6 +8,11 @@ buildscript {
   }
 }
 
+// this task is only valid pre 5
+task wrapper(type: Wrapper) {
+  gradleVersion = '4.0'
+}
+
 // pegasus encapsulates restli and other libraries
 final pegasusVersion = '11.0.17'
 
@@ -36,8 +41,6 @@ allprojects {
 
 // subproject plugins, dependencies and repositories
 subprojects {
-  apply plugin: 'maven'
-
   afterEvaluate {
     // add the standard pegasus dependencies wherever the plugin is used
     if (project.plugins.hasPlugin('pegasus')) {
@@ -47,7 +50,6 @@ subprojects {
       }
     }
   }
-
   repositories {
     mavenCentral()
   }

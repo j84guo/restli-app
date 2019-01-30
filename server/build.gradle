@@ -1,0 +1,25 @@
+// generate restli files
+apply plugin: 'pegasus'
+
+// extension property is api project
+ext.apiProject = project(':api')
+
+dependencies {
+    // api project
+    compile project(path: ':api', configuration: 'dataTemplate')
+    // restli server
+    compile spec.product.pegasus.restliServer
+    // netty packaged for jetty
+    compile spec.product.pegasus.restliNettyStandalone
+}
+
+task startFortunesServer(type: JavaExec) {
+    // class with main method
+    main = 'com.linkedin.restli.server.NettyStandaloneLauncher'
+    // CLI args
+    args = ['-port', '8080', '-packages', 'restliapp']
+    // classpath same as main source set
+    classpath = sourceSets.main.runtimeClasspath
+    // if any input is needed from stdin
+    standardInput = System.in
+}
